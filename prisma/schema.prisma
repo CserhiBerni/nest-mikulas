@@ -12,3 +12,23 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Child {
+  id Int @id @default(autoincrement())
+  name String
+  address String
+  behaved Boolean
+
+  toys Toy[]
+}
+
+
+model Toy {
+  id Int @id @default(autoincrement())
+  name String
+  material String
+  weight Int
+
+  childId Int
+  child Child @relation(fields: [childId], references: [id])
+}
